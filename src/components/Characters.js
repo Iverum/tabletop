@@ -1,9 +1,10 @@
+import isEmpty from "lodash/isEmpty";
 import { inject, observer } from "mobx-react";
 import React from "react";
 
 import Character from "./Character";
 
-const Buttons = ({ addCharacter, deleteAllCharacters }) => (
+const Buttons = ({ addCharacter, deleteAllCharacters, disableDelete }) => (
   <div className="field is-grouped">
     <div className="control">
       <button
@@ -19,6 +20,7 @@ const Buttons = ({ addCharacter, deleteAllCharacters }) => (
     <div className="control">
       <button
         className="button is-danger is-outlined"
+        disabled={disableDelete}
         onClick={deleteAllCharacters}
       >
         <span className="icon">
@@ -58,6 +60,7 @@ const Characters = inject(stores => {
         <Buttons
           addCharacter={props.addCharacter}
           deleteAllCharacters={props.deleteAllCharacters}
+          disableDelete={isEmpty(props.characters)}
         />
       </div>
       {props.characters.map((character, index) => (
