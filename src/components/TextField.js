@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -23,7 +24,7 @@ const TextField = props => (
     {props.tag && <AbilityScoreTag {...getAbilityModifier(props.value)} />}
     <div className="control">
       <input
-        className="input"
+        className={cn('input', { 'is-static': props.readonly })}
         onChange={event =>
           props.onChange(
             props.type === 'number' ? +event.target.value : event.target.value
