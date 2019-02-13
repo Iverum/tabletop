@@ -26,8 +26,14 @@ const Characters = inject(stores => {
         <h1 className="title" style={{ marginBottom: 0 }}>
           Characters
         </h1>
-        <button className="button" onClick={props.addCharacter}>
-          New
+        <button
+          className="button is-primary has-icon-left"
+          onClick={props.addCharacter}
+        >
+          <span className="icon">
+            <i className="fas fa-plus" />
+          </span>
+          <span>New</span>
         </button>
       </div>
       {props.characters.map((character, index) => (
