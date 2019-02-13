@@ -1,39 +1,7 @@
 import set from 'lodash/set';
 import { action, decorate, observable, toJS } from 'mobx';
 
-class Character {
-  name = '';
-  player = '';
-  playbook = '';
-  level = 1;
-  experience = 1;
-
-  armor = 0;
-  maxHP = 10;
-  currentHP = 10;
-  damageDie = 'd6';
-
-  stats = observable({
-    charisma: 0,
-    constitution: 0,
-    dexterity: 0,
-    intelligence: 0,
-    strength: 0,
-    wisdom: 0
-  });
-}
-decorate(Character, {
-  armor: observable,
-  currentHP: observable,
-  damageDie: observable,
-  experience: observable,
-  level: observable,
-  maxHP: observable,
-  name: observable,
-  playbook: observable,
-  player: observable,
-  stats: observable
-});
+import Character from '../models/Character';
 
 class CharacterStore {
   characters = [];

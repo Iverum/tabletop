@@ -2,56 +2,7 @@ import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-function getAbilityModifier(abilityScore) {
-  if (abilityScore >= 16) {
-    return { type: 'is-primary', value: '+2' };
-  } else if (abilityScore <= 8) {
-    return { type: 'is-danger', value: '-1' };
-  } else if (abilityScore > 8 && abilityScore <= 12) {
-    return { type: 'is-info', value: '0' };
-  } else if (abilityScore > 12 && abilityScore <= 16) {
-    return { type: 'is-link', value: '+1' };
-  }
-}
-
-const AbilityScoreTag = props => (
-  <span className={`tag is-pulled-right ${props.type}`}>{props.value}</span>
-);
-
-const TextField = props => (
-  <div className="field" style={{ marginBottom: '0.75rem' }}>
-    <label className="label is-pulled-left">{props.label}</label>
-    {props.tag && <AbilityScoreTag {...getAbilityModifier(props.value)} />}
-    <div className="control">
-      <input
-        className="input"
-        onChange={event =>
-          props.onChange(
-            props.type === 'number' ? +event.target.value : event.target.value
-          )
-        }
-        placeholder={props.placeholder || props.label}
-        type={props.type}
-        value={props.value}
-      />
-    </div>
-  </div>
-);
-
-TextField.propTypes = {
-  label: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
-  tag: PropTypes.bool,
-  type: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-};
-
-TextField.defaultProps = {
-  placeholder: undefined,
-  tag: false,
-  type: 'text',
-  value: undefined
-};
+import TextField from './TextField';
 
 const Character = observer(props => (
   <div className="box">
@@ -71,8 +22,9 @@ const Character = observer(props => (
       />
       <TextField
         label="Playbook"
-        onChange={newValue => props.update('playbook', newValue)}
-        value={props.playbook}
+        readonly
+        // onChange={newValue => props.update('playbook', newValue)}
+        value={props.playbook.name}
       />
       <TextField
         label="Level"
@@ -96,9 +48,9 @@ const Character = observer(props => (
       />
       <TextField
         label="Max HP"
-        onChange={newValue => props.update('maxHP', newValue)}
+        readonly
         type="number"
-        value={props.maxHP}
+        value={props.playbook.maxHealth + props.stats.constitution}
       />
       <TextField
         label="Current HP"
@@ -108,9 +60,9 @@ const Character = observer(props => (
       />
       <TextField
         label="Damage"
-        onChange={newValue => props.update('damageDie', newValue)}
         placeholder="Damage Die"
-        value={props.damageDie}
+        readonly
+        value={props.playbook.damageDie}
       />
     </div>
     <div className="level">
@@ -163,14 +115,15 @@ const Character = observer(props => (
 Character.propTypes = {
   armor: PropTypes.number.isRequired,
   currentHP: PropTypes.number.isRequired,
-  damageDie: PropTypes.string.isRequired,
   delete: PropTypes.func.isRequired,
   experience: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     .isRequired,
   level: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  maxHP: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  playbook: PropTypes.string.isRequired,
+  playbook: PropTypes.shape({
+    damageDie: PropTypes.string.isRequired,
+    maxHealth: PropTypes.number.isRequired
+  }).isRequired,
   player: PropTypes.string.isRequired,
   stats: PropTypes.shape({
     charisma: PropTypes.number,
