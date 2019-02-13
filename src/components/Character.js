@@ -2,9 +2,26 @@ import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+function getAbilityModifier(abilityScore) {
+  if (abilityScore >= 16) {
+    return { type: 'is-primary', value: '+2' };
+  } else if (abilityScore <= 8) {
+    return { type: 'is-danger', value: '-1' };
+  } else if (abilityScore > 8 && abilityScore <= 12) {
+    return { type: 'is-info', value: '0' };
+  } else if (abilityScore > 12 && abilityScore <= 16) {
+    return { type: 'is-link', value: '+1' };
+  }
+}
+
+const AbilityScoreTag = props => (
+  <span className={`tag is-pulled-right ${props.type}`}>{props.value}</span>
+);
+
 const TextField = props => (
   <div className="field" style={{ marginBottom: '0.75rem' }}>
-    <label className="label">{props.label}</label>
+    <label className="label is-pulled-left">{props.label}</label>
+    {props.tag && <AbilityScoreTag {...getAbilityModifier(props.value)} />}
     <div className="control">
       <input
         className="input"
@@ -24,12 +41,14 @@ const TextField = props => (
 TextField.propTypes = {
   label: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
+  tag: PropTypes.bool,
   type: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 TextField.defaultProps = {
   placeholder: undefined,
+  tag: false,
   type: 'text',
   value: undefined
 };
@@ -98,36 +117,42 @@ const Character = observer(props => (
       <TextField
         label="Strength"
         onChange={newValue => props.update('stats.strength', newValue)}
+        tag
         type="number"
         value={props.stats.strength}
       />
       <TextField
         label="Dexterity"
         onChange={newValue => props.update('stats.dexterity', newValue)}
+        tag
         type="number"
         value={props.stats.dexterity}
       />
       <TextField
         label="Constitution"
         onChange={newValue => props.update('stats.constitution', newValue)}
+        tag
         type="number"
         value={props.stats.constitution}
       />
       <TextField
         label="Intelligence"
         onChange={newValue => props.update('stats.intelligence', newValue)}
+        tag
         type="number"
         value={props.stats.intelligence}
       />
       <TextField
         label="Wisdom"
         onChange={newValue => props.update('stats.wisdom', newValue)}
+        tag
         type="number"
         value={props.stats.wisdom}
       />
       <TextField
         label="Charisma"
         onChange={newValue => props.update('stats.charisma', newValue)}
+        tag
         type="number"
         value={props.stats.charisma}
       />
