@@ -5,19 +5,27 @@ import Character from './Character';
 
 const Characters = inject(stores => {
   const {
-    characterStore: { addCharacter, characters, updateCharacter }
+    characterStore: {
+      addCharacter,
+      characters,
+      deleteCharacter,
+      updateCharacter
+    }
   } = stores;
 
   return {
     addCharacter,
     characters,
+    deleteCharacter,
     updateCharacter
   };
 })(
   observer(props => (
     <section className="section">
-      <div className="level container">
-        <h1 className="title">Characters</h1>
+      <div className="level container box">
+        <h1 className="title" style={{ marginBottom: 0 }}>
+          Characters
+        </h1>
         <button className="button" onClick={props.addCharacter}>
           New
         </button>
@@ -25,6 +33,7 @@ const Characters = inject(stores => {
       {props.characters.map((character, index) => (
         <Character
           {...character}
+          delete={() => props.deleteCharacter(index)}
           key={index}
           update={(property, newValue) =>
             props.updateCharacter(index, property, newValue)

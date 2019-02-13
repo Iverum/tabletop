@@ -1,4 +1,4 @@
-import { action, decorate, observable } from 'mobx';
+import { action, decorate, observable, toJS } from 'mobx';
 
 class Character {
   name = '';
@@ -18,14 +18,34 @@ decorate(Character, {
 class CharacterStore {
   characters = [];
 
-  addCharacter = () => this.characters.push(new Character());
+  constructor() {
+    this.characters.push(
+      ...JSON.parse(localStorage.getItem('characters') || '[]')
+    );
+  }
 
-  updateCharacter = (index, property, newValue) =>
-    (this.characters[index][property] = newValue);
+  addCharacter = () => {
+    this.characters.push(new Character());
+    this.saveToLocalStorage();
+  };
+
+  deleteCharacter = index => {
+    this.characters.splice(index, 1);
+    this.saveToLocalStorage();
+  };
+
+  saveToLocalStorage = () =>
+    localStorage.setItem('characters', JSON.stringify(toJS(this.characters)));
+
+  updateCharacter = (index, property, newValue) => {
+    this.characters[index][property] = newValue;
+    this.saveToLocalStorage();
+  };
 }
 
 export default decorate(CharacterStore, {
   addCharacter: action,
   characters: observable,
+  deleteCharacter: action,
   updateCharacter: action
 });

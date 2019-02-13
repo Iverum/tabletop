@@ -32,6 +32,9 @@ TextField.defaultProps = {
 
 const Character = observer(props => (
   <div className="box">
+    <div className="title">
+      <button className="delete is-pulled-right" onClick={props.delete} />
+    </div>
     <div className="level">
       <TextField
         label="Name"
@@ -79,6 +82,7 @@ const Character = observer(props => (
 ));
 
 Character.propTypes = {
+  delete: PropTypes.func.isRequired,
   experience: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     .isRequired,
   level: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
