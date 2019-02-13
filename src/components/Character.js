@@ -65,10 +65,30 @@ const Character = observer(props => (
       />
     </div>
     <div className="level">
-      <TextField label="Armor" type="number" />
-      <TextField label="Max HP" type="number" />
-      <TextField label="Current HP" type="number" />
-      <TextField label="Damage" placeholder="Damage Die" />
+      <TextField
+        label="Armor"
+        onChange={newValue => props.update('armor', newValue)}
+        type="number"
+        value={props.armor}
+      />
+      <TextField
+        label="Max HP"
+        onChange={newValue => props.update('maxHP', newValue)}
+        type="number"
+        value={props.maxHP}
+      />
+      <TextField
+        label="Current HP"
+        onChange={newValue => props.update('currentHP', newValue)}
+        type="number"
+        value={props.currentHP}
+      />
+      <TextField
+        label="Damage"
+        onChange={newValue => props.update('damageDie', newValue)}
+        placeholder="Damage Die"
+        value={props.damageDie}
+      />
     </div>
     <div className="level">
       <TextField label="STR" placeholder="Strength Modifier" />
@@ -82,10 +102,14 @@ const Character = observer(props => (
 ));
 
 Character.propTypes = {
+  armor: PropTypes.number.isRequired,
+  currentHP: PropTypes.number.isRequired,
+  damageDie: PropTypes.string.isRequired,
   delete: PropTypes.func.isRequired,
   experience: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     .isRequired,
   level: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  maxHP: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   playbook: PropTypes.string.isRequired,
   player: PropTypes.string.isRequired,

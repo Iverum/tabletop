@@ -6,10 +6,19 @@ class Character {
   playbook = '';
   level = 1;
   experience = 1;
+
+  armor = 0;
+  maxHP = 10;
+  currentHP = 10;
+  damageDie = 'd6';
 }
 decorate(Character, {
+  armor: observable,
+  currentHP: observable,
+  damageDie: observable,
   experience: observable,
   level: observable,
+  maxHP: observable,
   name: observable,
   playbook: observable,
   player: observable

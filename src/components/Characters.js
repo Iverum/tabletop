@@ -22,7 +22,7 @@ const Characters = inject(stores => {
 })(
   observer(props => (
     <section className="section">
-      <div className="level container box">
+      <div className="level box">
         <h1 className="title" style={{ marginBottom: 0 }}>
           Characters
         </h1>
