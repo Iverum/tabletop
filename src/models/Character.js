@@ -1,18 +1,33 @@
-import random from 'lodash/random';
-import shuffle from 'lodash/shuffle';
-import { action, decorate, observable } from 'mobx';
+import random from "lodash/random";
+import shuffle from "lodash/shuffle";
+import { action, decorate, observable } from "mobx";
 
 const STARTING_ARRAY = [16, 15, 13, 12, 9, 8];
 
 export const PLAYBOOKS = {
-  Barbarian: { damageDie: 'd10', maxHealth: 9, name: 'Barbarian' },
-  Immolator: { damageDie: 'd8', maxHealth: 4, name: 'Immolator' },
-  Wizard: { damageDie: 'd4', maxHealth: 4, name: 'Wizard' }
+  Barbarian: {
+    damageDie: "d10",
+    maxHealth: 9,
+    name: "Barbarian",
+    names: ["Gorm", "Si-Yi", "Sen", "Priscilla", "Xia"]
+  },
+  Immolator: {
+    damageDie: "d8",
+    maxHealth: 4,
+    name: "Immolator",
+    names: ["Solomon", "Kalil", "Coalfang", "Cinderclaw", "Adur"]
+  },
+  Wizard: {
+    damageDie: "d4",
+    maxHealth: 4,
+    name: "Wizard",
+    names: ["Avon", "Morgan", "Galadiir", "Ysolde", "Xeno"]
+  }
 };
 
 class Character {
-  name = '';
-  player = '';
+  name = "";
+  player = "";
   playbook = null;
   level = 1;
   experience = 1;
@@ -41,6 +56,8 @@ class Character {
 
       const playbooks = Object.values(PLAYBOOKS);
       const randomPlaybook = playbooks[random(0, playbooks.length - 1)];
+      this.name =
+        randomPlaybook.names[random(0, randomPlaybook.names.length - 1)];
       this.updatePlaybook(randomPlaybook);
     } else {
       this.name = existingCharacter.name;
