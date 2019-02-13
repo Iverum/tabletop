@@ -8,7 +8,11 @@ const TextField = props => (
     <div className="control">
       <input
         className="input"
-        onChange={event => props.onChange(event.target.value)}
+        onChange={event =>
+          props.onChange(
+            props.type === 'number' ? +event.target.value : event.target.value
+          )
+        }
         placeholder={props.placeholder || props.label}
         type={props.type}
         value={props.value}
@@ -91,12 +95,42 @@ const Character = observer(props => (
       />
     </div>
     <div className="level">
-      <TextField label="STR" placeholder="Strength Modifier" />
-      <TextField label="DEX" placeholder="Dexterity Modifier" />
-      <TextField label="CON" placeholder="Constitution Modifier" />
-      <TextField label="INT" placeholder="Intelligence Modifier" />
-      <TextField label="WIS" placeholder="Wisdom Modifier" />
-      <TextField label="CHA" placeholder="Charisma Modifier" />
+      <TextField
+        label="Strength"
+        onChange={newValue => props.update('stats.strength', newValue)}
+        type="number"
+        value={props.stats.strength}
+      />
+      <TextField
+        label="Dexterity"
+        onChange={newValue => props.update('stats.dexterity', newValue)}
+        type="number"
+        value={props.stats.dexterity}
+      />
+      <TextField
+        label="Constitution"
+        onChange={newValue => props.update('stats.constitution', newValue)}
+        type="number"
+        value={props.stats.constitution}
+      />
+      <TextField
+        label="Intelligence"
+        onChange={newValue => props.update('stats.intelligence', newValue)}
+        type="number"
+        value={props.stats.intelligence}
+      />
+      <TextField
+        label="Wisdom"
+        onChange={newValue => props.update('stats.wisdom', newValue)}
+        type="number"
+        value={props.stats.wisdom}
+      />
+      <TextField
+        label="Charisma"
+        onChange={newValue => props.update('stats.charisma', newValue)}
+        type="number"
+        value={props.stats.charisma}
+      />
     </div>
   </div>
 ));
@@ -113,7 +147,26 @@ Character.propTypes = {
   name: PropTypes.string.isRequired,
   playbook: PropTypes.string.isRequired,
   player: PropTypes.string.isRequired,
+  stats: PropTypes.shape({
+    charisma: PropTypes.number,
+    constitution: PropTypes.number,
+    dexterity: PropTypes.number,
+    intelligence: PropTypes.number,
+    strength: PropTypes.number,
+    wisdom: PropTypes.number
+  }),
   update: PropTypes.func.isRequired
+};
+
+Character.defaultProps = {
+  stats: {
+    charisma: 0,
+    constitution: 0,
+    dexterity: 0,
+    intelligence: 0,
+    strength: 0,
+    wisdom: 0
+  }
 };
 
 export default Character;

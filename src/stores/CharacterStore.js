@@ -1,3 +1,4 @@
+import set from 'lodash/set';
 import { action, decorate, observable, toJS } from 'mobx';
 
 class Character {
@@ -11,6 +12,15 @@ class Character {
   maxHP = 10;
   currentHP = 10;
   damageDie = 'd6';
+
+  stats = observable({
+    charisma: 0,
+    constitution: 0,
+    dexterity: 0,
+    intelligence: 0,
+    strength: 0,
+    wisdom: 0
+  });
 }
 decorate(Character, {
   armor: observable,
@@ -21,7 +31,8 @@ decorate(Character, {
   maxHP: observable,
   name: observable,
   playbook: observable,
-  player: observable
+  player: observable,
+  stats: observable
 });
 
 class CharacterStore {
@@ -47,7 +58,7 @@ class CharacterStore {
     localStorage.setItem('characters', JSON.stringify(toJS(this.characters)));
 
   updateCharacter = (index, property, newValue) => {
-    this.characters[index][property] = newValue;
+    set(this.characters[index], property, newValue);
     this.saveToLocalStorage();
   };
 }
