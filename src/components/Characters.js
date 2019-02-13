@@ -5,12 +5,13 @@ import Character from './Character';
 
 const Characters = inject(stores => {
   const {
-    characterStore: { addCharacter, characters }
+    characterStore: { addCharacter, characters, updateCharacter }
   } = stores;
 
   return {
     addCharacter,
-    characters
+    characters,
+    updateCharacter
   };
 })(
   observer(props => (
@@ -22,7 +23,13 @@ const Characters = inject(stores => {
         </button>
       </div>
       {props.characters.map((character, index) => (
-        <Character key={index} {...character} />
+        <Character
+          {...character}
+          key={index}
+          update={(property, newValue) =>
+            props.updateCharacter(index, property, newValue)
+          }
+        />
       ))}
     </section>
   ))

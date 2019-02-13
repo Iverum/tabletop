@@ -19,9 +19,13 @@ class CharacterStore {
   characters = [];
 
   addCharacter = () => this.characters.push(new Character());
+
+  updateCharacter = (index, property, newValue) =>
+    (this.characters[index][property] = newValue);
 }
 
 export default decorate(CharacterStore, {
   addCharacter: action,
-  characters: observable
+  characters: observable,
+  updateCharacter: action
 });

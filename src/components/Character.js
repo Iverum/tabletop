@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -7,8 +8,10 @@ const TextField = props => (
     <div className="control">
       <input
         className="input"
+        onChange={event => props.onChange(event.target.value)}
         placeholder={props.placeholder || props.label}
         type={props.type}
+        value={props.value}
       />
     </div>
   </div>
@@ -17,22 +20,46 @@ const TextField = props => (
 TextField.propTypes = {
   label: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 TextField.defaultProps = {
   placeholder: undefined,
-  type: 'text'
+  type: 'text',
+  value: undefined
 };
 
-const Character = () => (
+const Character = observer(props => (
   <div className="box">
     <div className="level">
-      <TextField label="Name" />
-      <TextField label="Player" />
-      <TextField label="Playbook" />
-      <TextField label="Level" type="number" />
-      <TextField label="XP" type="number" />
+      <TextField
+        label="Name"
+        onChange={newValue => props.update('name', newValue)}
+        value={props.name}
+      />
+      <TextField
+        label="Player"
+        onChange={newValue => props.update('player', newValue)}
+        value={props.player}
+      />
+      <TextField
+        label="Playbook"
+        onChange={newValue => props.update('playbook', newValue)}
+        value={props.playbook}
+      />
+      <TextField
+        label="Level"
+        onChange={newValue => props.update('level', newValue)}
+        type="number"
+        value={props.level}
+      />
+      <TextField
+        label="XP"
+        onChange={newValue => props.update('experience', newValue)}
+        type="number"
+        value={props.experience}
+      />
     </div>
     <div className="level">
       <TextField label="Armor" type="number" />
@@ -49,6 +76,16 @@ const Character = () => (
       <TextField label="CHA" placeholder="Charisma Modifier" />
     </div>
   </div>
-);
+));
+
+Character.propTypes = {
+  experience: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
+  level: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  name: PropTypes.string.isRequired,
+  playbook: PropTypes.string.isRequired,
+  player: PropTypes.string.isRequired,
+  update: PropTypes.func.isRequired
+};
 
 export default Character;
