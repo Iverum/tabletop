@@ -30,6 +30,7 @@ const Character = () => (
     <div className="level">
       <TextField label="Name" />
       <TextField label="Player" />
+      <TextField label="Playbook" />
       <TextField label="Level" type="number" />
       <TextField label="XP" type="number" />
     </div>
