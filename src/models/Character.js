@@ -1,7 +1,10 @@
 import random from 'lodash/random';
+import shuffle from 'lodash/shuffle';
 import { decorate, observable } from 'mobx';
 
-export const Playbooks = {
+const STARTING_ARRAY = [16, 15, 13, 12, 9, 8];
+
+const PLAYBOOKS = {
   Barbarian: { damageDie: 'd10', maxHealth: 9, name: 'Barbarian' },
   Immolator: { damageDie: 'd8', maxHealth: 4, name: 'Immolator' },
   Wizard: { damageDie: 'd4', maxHealth: 4, name: 'Wizard' }
@@ -28,9 +31,18 @@ class Character {
   });
 
   constructor() {
-    const playbooks = Object.values(Playbooks);
+    const playbooks = Object.values(PLAYBOOKS);
     const randomPlaybook = playbooks[random(0, playbooks.length - 1)];
     this.playbook = randomPlaybook;
+
+    const shuffledStats = shuffle(STARTING_ARRAY);
+    this.stats.charisma = shuffledStats.pop();
+    this.stats.constitution = shuffledStats.pop();
+    this.stats.dexterity = shuffledStats.pop();
+    this.stats.intelligence = shuffledStats.pop();
+    this.stats.strength = shuffledStats.pop();
+    this.stats.wisdom = shuffledStats.pop();
+
     this.currentHP = this.playbook.maxHealth + this.stats.constitution;
   }
 }
