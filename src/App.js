@@ -3,6 +3,7 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Characters from "./components/Characters";
+import Moves from "./components/Moves";
 import TopNavigation from "./components/TopNavigation";
 import CharacterStore from "./stores/CharacterStore";
 
@@ -18,6 +19,7 @@ class App extends React.Component {
           <>
             <TopNavigation />
             <Route component={Characters} exact path={["/", "/characters"]} />
+            <Route component={Moves} exact path={"/moves"} />
           </>
         </Router>
       </Provider>
