@@ -2,6 +2,8 @@ import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { PLAYBOOKS } from '../models/Character';
+import Select from './Select';
 import TextField from './TextField';
 
 const Character = observer(props => (
@@ -20,11 +22,11 @@ const Character = observer(props => (
         onChange={newValue => props.update('player', newValue)}
         value={props.player}
       />
-      <TextField
+      <Select
         label="Playbook"
-        readonly
-        // onChange={newValue => props.update('playbook', newValue)}
-        value={props.playbook.name}
+        onChange={newValue => props.update('playbook', PLAYBOOKS[newValue])}
+        options={Object.values(PLAYBOOKS)}
+        value={props.playbook}
       />
       <TextField
         label="Level"

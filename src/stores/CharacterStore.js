@@ -8,7 +8,9 @@ class CharacterStore {
 
   constructor() {
     this.characters.push(
-      ...JSON.parse(localStorage.getItem('characters') || '[]')
+      ...JSON.parse(localStorage.getItem('characters') || '[]').map(
+        c => new Character(c)
+      )
     );
   }
 
@@ -26,6 +28,10 @@ class CharacterStore {
     localStorage.setItem('characters', JSON.stringify(toJS(this.characters)));
 
   updateCharacter = (index, property, newValue) => {
+    if (property === 'playbook') {
+      this.characters[index].updatePlaybook(newValue);
+    }
+
     set(this.characters[index], property, newValue);
     this.saveToLocalStorage();
   };
