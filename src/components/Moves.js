@@ -8,7 +8,7 @@ function mapMovesToColumns() {
 
   MOVES.forEach((move, index) => {
     row.push(
-      <div className={`column is-4`}>
+      <div className={`column is-3`}>
         <div className="card">
           <div className="card-header">
             <h1 className="card-header-title">{move.name}</h1>
@@ -20,11 +20,15 @@ function mapMovesToColumns() {
       </div>
     );
 
-    if (index % 4 === 0) {
+    if ((index + 1) % 4 === 0) {
       rows.push(row);
       row = [];
     }
   });
+
+  if (row.length > 0) {
+    rows.push(row);
+  }
 
   return rows;
 }
