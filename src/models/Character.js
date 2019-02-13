@@ -2,28 +2,9 @@ import random from "lodash/random";
 import shuffle from "lodash/shuffle";
 import { action, decorate, observable } from "mobx";
 
-const STARTING_ARRAY = [16, 15, 13, 12, 9, 8];
+import PLAYBOOKS from "../constants/playbooks";
 
-export const PLAYBOOKS = {
-  Barbarian: {
-    damageDie: "d10",
-    maxHealth: 9,
-    name: "Barbarian",
-    names: ["Gorm", "Si-Yi", "Sen", "Priscilla", "Xia"]
-  },
-  Immolator: {
-    damageDie: "d8",
-    maxHealth: 4,
-    name: "Immolator",
-    names: ["Solomon", "Kalil", "Coalfang", "Cinderclaw", "Adur"]
-  },
-  Wizard: {
-    damageDie: "d4",
-    maxHealth: 4,
-    name: "Wizard",
-    names: ["Avon", "Morgan", "Galadiir", "Ysolde", "Xeno"]
-  }
-};
+const STARTING_ARRAY = [16, 15, 13, 12, 9, 8];
 
 class Character {
   name = "";

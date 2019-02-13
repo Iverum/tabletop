@@ -2,7 +2,7 @@ import { observer } from "mobx-react";
 import PropTypes from "prop-types";
 import React from "react";
 
-import { PLAYBOOKS } from "../models/Character";
+import PLAYBOOKS from "../constants/playbooks";
 import AbilityScoreTag from "./AbilityScoreTag";
 import Select from "./Select";
 import TextField from "./TextField";
