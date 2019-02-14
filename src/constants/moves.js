@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const BASIC_MOVES = [
   {
@@ -18,7 +18,7 @@ const BASIC_MOVES = [
         </p>
       </>
     ),
-    name: "Hack & Slash"
+    name: 'Hack & Slash'
   },
   {
     content: (
@@ -36,13 +36,13 @@ const BASIC_MOVES = [
         </ul>
       </>
     ),
-    name: "Volley"
+    name: 'Volley'
   },
   {
     content: (
       <>
         <p>
-          When you <strong>act despite an imminent threat</strong> or{" "}
+          When you <strong>act despite an imminent threat</strong> or&nbsp;
           <strong>suffer a calamity</strong>, say how you deal with it and roll.
           If you do it:
         </p>
@@ -64,7 +64,115 @@ const BASIC_MOVES = [
         </p>
       </>
     ),
-    name: "Defy Danger"
+    name: 'Defy Danger'
+  },
+  {
+    content: (
+      <>
+        <p>
+          When you&nbsp;
+          <strong>
+            stand in defense of a person, item, or location under attack
+          </strong>
+          , roll +CON.
+        </p>
+        <p>On a 10+, hold 3</p>
+        <p>On a 7-9, hold 1.</p>
+        <p>
+          As long as you stand in defense, when you or the thing you defend is
+          attacked you may spend hold, 1 for 1, to choose an option:
+        </p>
+        <ul>
+          <li>redirect an attack from the thing you defend to yourself</li>
+          <li>halve the attack’s effect or damage</li>
+          <li>
+            open up the attacker to an ally giving that ally +1 forward against
+            the attacker
+          </li>
+          <li>deal damage to the attacker equal to your level</li>
+        </ul>
+      </>
+    ),
+    name: 'Defend'
+  },
+  {
+    content: (
+      <>
+        <p>
+          When you&nbsp;
+          <strong>consult your accumulated knowledge about something</strong>,
+          roll+INT.
+        </p>
+        <p>
+          On a 10+, the GM will tell you something interesting and useful about
+          the subject relevant to your situation.
+        </p>
+        <p>
+          On a 7–9, the GM will only tell you something interesting—it’s on you
+          to make it useful. The GM might ask you "How do you know this?" Tell
+          them the truth, now.
+        </p>
+      </>
+    ),
+    name: 'Spout Lore'
+  },
+  {
+    content: (
+      <>
+        <p>
+          When you <strong>closely study a person or situation</strong>, roll
+          +WIS.
+        </p>
+        <p>On a 10+, ask the GM 3 questions from the list below.</p>
+        <p>On a 7-9, ask the GM 1 question.</p>
+        <p>Either way, take +1 forward acting on the answers.</p>
+        <ul>
+          <li>What here is useful or valuable to me?</li>
+          <li>What happened here recently?</li>
+          <li>Who here is really in control?</li>
+          <li>What here is not what it appears to be?</li>
+          <li>What is about to happen?</li>
+          <li>What should I be on the lookout for?</li>
+        </ul>
+      </>
+    ),
+    name: 'Discern Realities'
+  },
+  {
+    content: (
+      <>
+        <p>
+          When you&nbsp;
+          <strong>have leverage on a GM character and manipulate them</strong>,
+          roll +CHA.
+        </p>
+        <p>Leverage is something they need or want.</p>
+        <p>
+          On a 10+, they do what you ask if you first promise what they ask of
+          you.
+        </p>
+        <p>
+          On a 7–9, they will do what you ask, but need some concrete assurance
+          of your promise, right now.
+        </p>
+      </>
+    ),
+    name: 'Parley'
+  },
+  {
+    content: (
+      <>
+        <p>
+          When you <strong>help or hinder someone you have a bond with</strong>,
+          roll +Bond with them.
+        </p>
+        <p>On a 10+ they take +1 or -2, your choice.</p>
+        <p>
+          On a 7–9 you also expose yourself to danger, retribution, or cost.
+        </p>
+      </>
+    ),
+    name: 'Aid or Interfere'
   }
 ];
 

@@ -1,37 +1,30 @@
-import React from "react";
+import React, { useState } from 'react';
 
-import MOVES from "../constants/moves";
+import MOVES from '../constants/moves';
 
-function mapMovesToColumns() {
-  const rows = [];
-  let row = [];
+const Card = ({ content, name }) => {
+  const [open, setOpen] = useState(false);
 
-  MOVES.forEach((move, index) => {
-    row.push(
-      <div className={`column is-3`}>
-        <div className="card">
-          <div className="card-header">
-            <h1 className="card-header-title">{move.name}</h1>
+  return (
+    <div className="column is-one-quarter">
+      <div className="card">
+        <header className="card-header">
+          <h1 className="card-header-title">{name}</h1>
+          <div className="card-header-icon" onClick={() => setOpen(!open)}>
+            <span class="icon">
+              <i aria-hidden="true" class="fas fa-angle-down" />
+            </span>
           </div>
-          <div className="card-content">
-            <div className="content">{move.content}</div>
-          </div>
-        </div>
+        </header>
+        {open && (
+          <section className="card-content">
+            <div className="content">{content}</div>
+          </section>
+        )}
       </div>
-    );
-
-    if ((index + 1) % 4 === 0) {
-      rows.push(row);
-      row = [];
-    }
-  });
-
-  if (row.length > 0) {
-    rows.push(row);
-  }
-
-  return rows;
-}
+    </div>
+  );
+};
 
 const Moves = () => (
   <section className="section">
@@ -40,9 +33,12 @@ const Moves = () => (
         Moves
       </h1>
     </div>
-    {mapMovesToColumns().map(row => (
-      <div className="columns">{row}</div>
-    ))}
+
+    <div className="columns is-multiline is-centered is-mobile">
+      {MOVES.map(move => (
+        <Card {...move} />
+      ))}
+    </div>
   </section>
 );
 
