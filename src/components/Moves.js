@@ -1,19 +1,20 @@
 import cn from 'classnames';
 import capitalize from 'lodash/capitalize';
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { BASIC_MOVES, SPECIAL_MOVES } from '../constants/moves';
 
-const Button = ({ moveSet, setMoves, type }) => (
+const Button = ({ moveSet, type }) => (
   <div className="control">
-    <button
+    <Link
       className={cn('button is-primary', {
-        'is-outlined': moveSet !== type
+        'is-outlined': !moveSet ? type !== 'basic' : moveSet !== type
       })}
-      onClick={() => setMoves(type)}
+      to={`/moves/${type}`}
     >
       {capitalize(type)}
-    </button>
+    </Link>
   </div>
 );
 
@@ -23,8 +24,8 @@ const Header = ({ moveSet, setMoves }) => (
       <h1 className="title control" style={{ marginBottom: 0 }}>
         Moves
       </h1>
-      <Button moveSet={moveSet} setMoves={setMoves} type="basic" />
-      <Button moveSet={moveSet} setMoves={setMoves} type="special" />
+      <Button moveSet={moveSet} type="basic" />
+      <Button moveSet={moveSet} type="special" />
     </div>
   </div>
 );
@@ -45,8 +46,12 @@ const Card = ({ content, name }) => (
   </section>
 );
 
-const Moves = () => {
-  const [moveSet, setMoves] = useState('basic');
+const Moves = props => {
+  const {
+    match: {
+      params: { moveSet }
+    }
+  } = props;
 
   let moves = [];
   switch (moveSet) {
@@ -63,7 +68,7 @@ const Moves = () => {
 
   return (
     <section className="section">
-      <Header moveSet={moveSet} setMoves={setMoves} />
+      <Header moveSet={moveSet} />
       <div
         style={{
           display: 'flex',

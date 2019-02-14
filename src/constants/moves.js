@@ -204,6 +204,69 @@ export const SPECIAL_MOVES = [
       </>
     ),
     name: 'Last Breath'
+  },
+  {
+    content: (
+      <>
+        <p>
+          When you <strong>make a move while carrying weight</strong> you may be
+          encumbered.
+        </p>
+        <p>If your weight carried is:</p>
+        <ul>
+          <li>less than or equal to your Load you suffer no penalty</li>
+          <li>
+            less than or equal to your Load+2 you take -1 ongoing until you
+            lighten your load
+          </li>
+          <li>
+            greater than your Load+2 you have two choices: drop at least 1
+            weight and roll at -1 <em>or</em> fail
+          </li>
+        </ul>
+      </>
+    ),
+    name: 'Encumbrance'
+  },
+  {
+    content: (
+      <>
+        <p>
+          When you <strong>​settle in to rest in an unsafe area</strong>, answer
+          the GMs questions about your campsite. Then, each player (including
+          the GM) asks one of the following questions of a character in camp;
+          that character’s player must answer honestly.
+        </p>
+        <ul>
+          <li>What do you do in camp that is so annoying/endearing?</li>
+          <li>What do I do in camp that you find so annoying/endearing?</li>
+          <li>Who or what seems to be on your mind?</li>
+          <li>What do we find ourselves talking about?</li>
+          <li>What do you do to pass the time?</li>
+          <li>
+            What do you reveal about yourself that I/we hadn't realized before?
+          </li>
+        </ul>
+        <p>The GM will decide if anything happens during the night.</p>
+        <p>
+          When you've&nbsp;
+          <strong>
+            eaten a ration, drunk your fill, and gotten a few hours of sleep
+          </strong>
+          , pick one:
+        </p>
+        <ul>
+          <li>Heal damage equal to half your HP rounded up</li>
+          <li>
+            Expend one use of an appropriate resource (bandages, whisky,
+            rations) to clear one debilities; everyone must agree the resource
+            makes sense
+          </li>
+          <li>Take +1 forward</li>
+        </ul>
+      </>
+    ),
+    name: 'Make Camp'
   }
 ];
 
