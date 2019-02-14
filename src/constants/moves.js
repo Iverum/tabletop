@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BASIC_MOVES = [
+export const BASIC_MOVES = [
   {
     content: (
       <>
@@ -176,4 +176,35 @@ const BASIC_MOVES = [
   }
 ];
 
-export default BASIC_MOVES;
+export const SPECIAL_MOVES = [
+  {
+    content: (
+      <>
+        <p>
+          When{' '}
+          <strong>
+            you’re dying you catch a glimpse of what lies beyond the Black Gates
+            of Death’s Kingdom
+          </strong>
+          , roll +nothing
+        </p>
+        <p>
+          On a 10+, you’ve cheated Death—you’re in a bad spot but you’re still
+          alive.
+        </p>
+        <p>
+          On a 7–9, Death himself will offer you a bargain. Take it and
+          stabilize or refuse and pass beyond the Black Gates into whatever fate
+          awaits you.
+        </p>
+        <p>
+          On 6-, your fate is sealed. You’re marked as Death’s own and you’ll
+          cross the threshold soon. The GM will tell you when.
+        </p>
+      </>
+    ),
+    name: 'Last Breath'
+  }
+];
+
+export default [...BASIC_MOVES, ...SPECIAL_MOVES];
