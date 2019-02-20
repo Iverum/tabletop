@@ -20,16 +20,36 @@ const Character = inject((stores, ownProps) => {
       updateCharacter(characterIndex, property, newValue)
   };
 })(
-  observer(props => (
-    <section className="section">
-      <Header title={props.character.name}>
-        <LinkButton label="Info" to={`/characters/${props.uuid}/stats`} />
-        <LinkButton label="Moves" to={`/characters/${props.uuid}/moves`} />
-        <LinkButton label="Gear" to={`/characters/${props.uuid}/gear`} />
-      </Header>
-      <StatBlock {...props} />
-    </section>
-  ))
+  observer(props => {
+    const {
+      match: {
+        params: { section, uuid }
+      }
+    } = props;
+
+    return (
+      <section className="section">
+        <Header title={props.character.name}>
+          <LinkButton
+            isActive={!section || section === "stats"}
+            label="Info"
+            to={`/characters/${uuid}/stats`}
+          />
+          <LinkButton
+            isActive={section === "moves"}
+            label="Moves"
+            to={`/characters/${uuid}/moves`}
+          />
+          <LinkButton
+            isActive={section === "gear"}
+            label="Gear"
+            to={`/characters/${uuid}/gear`}
+          />
+        </Header>
+        <StatBlock {...props} />
+      </section>
+    );
+  })
 );
 
 export default Character;

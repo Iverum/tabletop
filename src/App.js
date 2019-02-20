@@ -19,7 +19,7 @@ class App extends React.Component {
         <Router>
           <>
             <TopNavigation />
-            <Route component={Character} path="/characters/:uuid" />
+            <Route component={Character} path="/characters/:uuid/:section?" />
             <Route component={Characters} exact path={["/", "/characters"]} />
             <Route component={Moves} exact path={"/moves/:moveSet?"} />
           </>
