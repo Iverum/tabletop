@@ -2,7 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
 const isCharactersActive = (match, location) =>
-  location.pathname === "/" || location.pathname === "/characters";
+  location.pathname === "/" || location.pathname.includes("/characters");
 
 const TopNavigation = () => (
   <nav

@@ -1,23 +1,8 @@
-import cn from "classnames";
-import capitalize from "lodash/capitalize";
 import React from "react";
-import { Link } from "react-router-dom";
 
 import Header from "../components/Header";
+import LinkButton from "../components/LinkButton";
 import { BASIC_MOVES, SPECIAL_MOVES } from "../constants/moves";
-
-const Button = ({ moveSet, type }) => (
-  <div className="control">
-    <Link
-      className={cn("button is-primary", {
-        "is-outlined": !moveSet ? type !== "basic" : moveSet !== type
-      })}
-      to={`/moves/${type}`}
-    >
-      {capitalize(type)}
-    </Link>
-  </div>
-);
 
 const Card = ({ content, name }) => (
   <section style={{ padding: "1rem", minWidth: "33%", maxWidth: "33%" }}>
@@ -58,8 +43,16 @@ const Moves = props => {
   return (
     <section className="section">
       <Header title="Moves">
-        <Button moveSet={moveSet} type="basic" />
-        <Button moveSet={moveSet} type="special" />
+        <LinkButton
+          isActive={!moveSet || moveSet === "basic"}
+          label="Basic"
+          to="/moves/basic"
+        />
+        <LinkButton
+          isActive={moveSet === "special"}
+          label="Special"
+          to="/moves/special"
+        />
       </Header>
       <div
         style={{
