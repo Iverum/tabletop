@@ -2,10 +2,10 @@ import { observer } from "mobx-react";
 import PropTypes from "prop-types";
 import React from "react";
 
-import PLAYBOOKS from "../constants/playbooks";
-import AbilityScoreTag from "./AbilityScoreTag";
-import Select from "./Select";
-import TextField from "./TextField";
+import AbilityScoreTag from "../../components/AbilityScoreTag";
+import Select from "../../components/Select";
+import TextField from "../../components/TextField";
+import PLAYBOOKS from "../../constants/playbooks";
 
 function getAbilityModifier(abilityScore) {
   if (abilityScore >= 16) {
