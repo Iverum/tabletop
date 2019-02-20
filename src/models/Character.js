@@ -1,12 +1,14 @@
 import random from "lodash/random";
 import shuffle from "lodash/shuffle";
 import { action, decorate, observable } from "mobx";
+import uuid from "uuid/v4";
 
 import PLAYBOOKS from "../constants/playbooks";
 
 const STARTING_ARRAY = [16, 15, 13, 12, 9, 8];
 
 class Character {
+  uuid = null;
   name = "";
   player = "";
   playbook = null;
@@ -27,6 +29,7 @@ class Character {
 
   constructor(existingCharacter) {
     if (!existingCharacter) {
+      this.uuid = uuid();
       const shuffledStats = shuffle(STARTING_ARRAY);
       this.stats.charisma = shuffledStats.pop();
       this.stats.constitution = shuffledStats.pop();
@@ -41,6 +44,7 @@ class Character {
         randomPlaybook.names[random(0, randomPlaybook.names.length - 1)];
       this.updatePlaybook(randomPlaybook);
     } else {
+      this.uuid = existingCharacter.uuid;
       this.name = existingCharacter.name;
       this.player = existingCharacter.player;
       this.level = existingCharacter.level;
@@ -74,5 +78,6 @@ export default decorate(Character, {
   playbook: observable,
   player: observable,
   stats: observable,
-  updatePlaybook: action
+  updatePlaybook: action,
+  uuid: observable
 });

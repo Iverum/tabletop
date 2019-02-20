@@ -22,6 +22,14 @@ function getAbilityModifier(abilityScore) {
 const Character = observer(props => (
   <div className="box">
     <div className="title">
+      <button
+        className="button is-info is-small"
+        onClick={() => console.log(props.uuid)}
+      >
+        <span className="icon is-small">
+          <i className="fas fa-info-circle" />
+        </span>
+      </button>
       <button className="delete is-pulled-right" onClick={props.delete} />
     </div>
     <div className="level">
