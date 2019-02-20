@@ -1,3 +1,4 @@
+import get from "lodash/get";
 import random from "lodash/random";
 import shuffle from "lodash/shuffle";
 import { action, decorate, observable } from "mobx";
@@ -60,6 +61,19 @@ class Character {
       this.updatePlaybook(existingCharacter.playbook);
     }
   }
+
+  getAbilityModifier = ability => {
+    const abilityScore = get(this, `stats.${ability}`, 0);
+    if (abilityScore >= 16) {
+      return { type: "is-primary", value: "+2" };
+    } else if (abilityScore <= 8) {
+      return { type: "is-danger", value: "-1" };
+    } else if (abilityScore > 8 && abilityScore <= 12) {
+      return { type: "is-info", value: "0" };
+    } else if (abilityScore > 12 && abilityScore <= 16) {
+      return { type: "is-link", value: "+1" };
+    }
+  };
 
   updatePlaybook = newPlaybook => {
     this.playbook = newPlaybook;

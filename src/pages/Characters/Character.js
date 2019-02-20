@@ -8,18 +8,6 @@ import Select from "../../components/Select";
 import TextField from "../../components/TextField";
 import PLAYBOOKS from "../../constants/playbooks";
 
-function getAbilityModifier(abilityScore) {
-  if (abilityScore >= 16) {
-    return { type: "is-primary", value: "+2" };
-  } else if (abilityScore <= 8) {
-    return { type: "is-danger", value: "-1" };
-  } else if (abilityScore > 8 && abilityScore <= 12) {
-    return { type: "is-info", value: "0" };
-  } else if (abilityScore > 12 && abilityScore <= 16) {
-    return { type: "is-link", value: "+1" };
-  }
-}
-
 const Character = observer(props => (
   <section className="box">
     <div className="level">
@@ -99,46 +87,42 @@ const Character = observer(props => (
       <TextField
         label="Strength"
         onChange={newValue => props.update("stats.strength", newValue)}
-        tag={<AbilityScoreTag {...getAbilityModifier(props.stats.strength)} />}
+        tag={<AbilityScoreTag {...props.getAbilityModifier("strength")} />}
         type="number"
         value={props.stats.strength}
       />
       <TextField
         label="Dexterity"
         onChange={newValue => props.update("stats.dexterity", newValue)}
-        tag={<AbilityScoreTag {...getAbilityModifier(props.stats.dexterity)} />}
+        tag={<AbilityScoreTag {...props.getAbilityModifier("dexterity")} />}
         type="number"
         value={props.stats.dexterity}
       />
       <TextField
         label="Constitution"
         onChange={newValue => props.update("stats.constitution", newValue)}
-        tag={
-          <AbilityScoreTag {...getAbilityModifier(props.stats.constitution)} />
-        }
+        tag={<AbilityScoreTag {...props.getAbilityModifier("constitution")} />}
         type="number"
         value={props.stats.constitution}
       />
       <TextField
         label="Intelligence"
         onChange={newValue => props.update("stats.intelligence", newValue)}
-        tag={
-          <AbilityScoreTag {...getAbilityModifier(props.stats.intelligence)} />
-        }
+        tag={<AbilityScoreTag {...props.getAbilityModifier("intelligence")} />}
         type="number"
         value={props.stats.intelligence}
       />
       <TextField
         label="Wisdom"
         onChange={newValue => props.update("stats.wisdom", newValue)}
-        tag={<AbilityScoreTag {...getAbilityModifier(props.stats.wisdom)} />}
+        tag={<AbilityScoreTag {...props.getAbilityModifier("wisdom")} />}
         type="number"
         value={props.stats.wisdom}
       />
       <TextField
         label="Charisma"
         onChange={newValue => props.update("stats.charisma", newValue)}
-        tag={<AbilityScoreTag {...getAbilityModifier(props.stats.charisma)} />}
+        tag={<AbilityScoreTag {...props.getAbilityModifier("wisdom")} />}
         type="number"
         value={props.stats.charisma}
       />
