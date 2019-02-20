@@ -1,0 +1,4 @@
+a.navbar-item.is-active,
+a.navbar-item.is-active:not(:hover) {
+  font-weight: 700;
+}
