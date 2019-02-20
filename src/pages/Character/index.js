@@ -1,5 +1,6 @@
 import { inject, observer } from "mobx-react";
 import React from "react";
+import { Route, Switch } from "react-router-dom";
 
 import Header from "../../components/Header";
 import LinkButton from "../../components/LinkButton";
@@ -46,7 +47,12 @@ const Character = inject((stores, ownProps) => {
             to={`/characters/${uuid}/gear`}
           />
         </Header>
-        <StatBlock {...props} />
+        <Switch>
+          <Route
+            path={`/characters/${uuid}/stats`}
+            render={() => <StatBlock {...props} />}
+          />
+        </Switch>
       </section>
     );
   })
