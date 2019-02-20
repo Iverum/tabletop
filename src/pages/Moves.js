@@ -1,15 +1,16 @@
-import cn from 'classnames';
-import capitalize from 'lodash/capitalize';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import cn from "classnames";
+import capitalize from "lodash/capitalize";
+import React from "react";
+import { Link } from "react-router-dom";
 
-import { BASIC_MOVES, SPECIAL_MOVES } from '../constants/moves';
+import Header from "../components/Header";
+import { BASIC_MOVES, SPECIAL_MOVES } from "../constants/moves";
 
 const Button = ({ moveSet, type }) => (
   <div className="control">
     <Link
-      className={cn('button is-primary', {
-        'is-outlined': !moveSet ? type !== 'basic' : moveSet !== type
+      className={cn("button is-primary", {
+        "is-outlined": !moveSet ? type !== "basic" : moveSet !== type
       })}
       to={`/moves/${type}`}
     >
@@ -18,23 +19,11 @@ const Button = ({ moveSet, type }) => (
   </div>
 );
 
-const Header = ({ moveSet, setMoves }) => (
-  <div className="level box">
-    <div className="field is-grouped">
-      <h1 className="title control" style={{ marginBottom: 0 }}>
-        Moves
-      </h1>
-      <Button moveSet={moveSet} type="basic" />
-      <Button moveSet={moveSet} type="special" />
-    </div>
-  </div>
-);
-
 const Card = ({ content, name }) => (
-  <section style={{ padding: '1rem', minWidth: '33%', maxWidth: '33%' }}>
+  <section style={{ padding: "1rem", minWidth: "33%", maxWidth: "33%" }}>
     <div
       className="card"
-      style={{ display: 'flex', flexGrow: 1, flexDirection: 'column' }}
+      style={{ display: "flex", flexGrow: 1, flexDirection: "column" }}
     >
       <header className="card-header">
         <h1 className="card-header-title">{name}</h1>
@@ -55,12 +44,12 @@ const Moves = props => {
 
   let moves = [];
   switch (moveSet) {
-    case 'special': {
+    case "special": {
       moves = SPECIAL_MOVES;
       break;
     }
 
-    case 'basic':
+    case "basic":
     default:
       moves = BASIC_MOVES;
       break;
@@ -68,13 +57,16 @@ const Moves = props => {
 
   return (
     <section className="section">
-      <Header moveSet={moveSet} />
+      <Header title="Moves">
+        <Button moveSet={moveSet} type="basic" />
+        <Button moveSet={moveSet} type="special" />
+      </Header>
       <div
         style={{
-          display: 'flex',
-          flexDirection: 'row',
+          display: "flex",
+          flexDirection: "row",
           flexGrow: 1,
-          flexWrap: 'wrap'
+          flexWrap: "wrap"
         }}
       >
         {moves.map(move => (

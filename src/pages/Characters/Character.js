@@ -1,6 +1,7 @@
 import { observer } from "mobx-react";
 import PropTypes from "prop-types";
 import React from "react";
+import { withRouter } from "react-router-dom";
 
 import AbilityScoreTag from "../../components/AbilityScoreTag";
 import Select from "../../components/Select";
@@ -20,17 +21,23 @@ function getAbilityModifier(abilityScore) {
 }
 
 const Character = observer(props => (
-  <div className="box">
-    <div className="title">
+  <section className="box">
+    <div className="level">
+      <div className="level-item level-left">
+        <button
+          className="button is-info is-small"
+          onClick={() => props.history.push(`/characters/${props.uuid}`)}
+        >
+          <span className="icon is-small">
+            <i className="fas fa-info-circle" />
+          </span>
+        </button>
+        <h1 className="title">{props.name}</h1>
+      </div>
       <button
-        className="button is-info is-small"
-        onClick={() => console.log(props.uuid)}
-      >
-        <span className="icon is-small">
-          <i className="fas fa-info-circle" />
-        </span>
-      </button>
-      <button className="delete is-pulled-right" onClick={props.delete} />
+        className="delete level-item level-right"
+        onClick={props.delete}
+      />
     </div>
     <div className="level">
       <TextField
@@ -136,7 +143,7 @@ const Character = observer(props => (
         value={props.stats.charisma}
       />
     </div>
-  </div>
+  </section>
 ));
 
 Character.propTypes = {
@@ -145,6 +152,7 @@ Character.propTypes = {
   delete: PropTypes.func.isRequired,
   experience: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     .isRequired,
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
   level: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   name: PropTypes.string.isRequired,
   playbook: PropTypes.shape({
@@ -174,4 +182,4 @@ Character.defaultProps = {
   }
 };
 
-export default Character;
+export default withRouter(Character);
