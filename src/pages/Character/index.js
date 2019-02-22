@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 
 import Header from "../../components/Header";
 import LinkButton from "../../components/LinkButton";
+import MoveList from "./MoveList";
 import StatBlock from "./StatBlock";
 
 const Character = inject((stores, ownProps) => {
@@ -49,7 +50,11 @@ const Character = inject((stores, ownProps) => {
         </Header>
         <Switch>
           <Route
-            path={`/characters/${uuid}/stats`}
+            path={`/characters/${uuid}/moves`}
+            render={() => <MoveList playbook={props.character.playbook} />}
+          />
+          <Route
+            path={[`/characters/${uuid}`, `/characters/${uuid}/stats`]}
             render={() => <StatBlock {...props} />}
           />
         </Switch>

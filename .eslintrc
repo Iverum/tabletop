@@ -1,0 +1,29 @@
+{
+  "env": {
+    "amd": true,
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": false
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "extends": ["plugin:prettier/recommended"]
+  },
+  "plugins": ["prettier", "react", "babel", "react-hooks"],
+  "rules": {
+    "prettier/prettier": "error",
+    "no-unused-vars": "error",
+    "react/jsx-uses-vars": "error",
+    "react/jsx-uses-react": "error",
+    "react-hooks/rules-of-hooks": "error"
+  },
+  "settings": {
+    "ecmascript": 8,
+    "jsx": true
+  }
+}
